@@ -606,6 +606,9 @@ static void mptcp_sock_def_error_report(struct sock *sk)
 			tcp_done(meta_sk);
 	}
 
+	if (mpcb->pm_ops->subflow_error)
+		mpcb->pm_ops->subflow_error(meta_sk, sk);
+
 	sk->sk_err = 0;
 	return;
 }
